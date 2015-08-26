@@ -1,0 +1,38 @@
+class Category
+  has_and_belongs_to_many(:recipes)
+end
+
+class Recipe
+  has_and_belongs_to_many(:categories)
+  has_and_belongs_to_many(:ingredients)
+end
+
+class Ingredient
+  has_and_belongs_to_many(:recipes)
+end
+
+
+categories
+id
+name
+
+categories_recipes
+id
+category_id
+recipe_id
+
+recipes
+id
+name
+instructions
+ingredient_ids
+category_ids
+
+recipes_ingredients
+id
+recipe_ids
+ingredient_ids
+
+ingredients
+id
+name
