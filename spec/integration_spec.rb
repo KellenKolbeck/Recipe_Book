@@ -18,4 +18,21 @@ describe("/categories/:id", {:type => :feature}) do
     click_button("Edit")
     expect(page).to have_content("Italiano Food")
   end
+
+  it("will allow a user to delete a category name") do
+    test_category = Category.new({:name => "Italian Food"})
+    test_category.save()
+    visit("/categories/#{test_category.id()}")
+    click_button('Delete')
+    expect(page).to have_content("")
+  end
+end
+
+describe("/ingredients", {:type => :feature}) do
+  it("will allow the user to add a new ingredient and display all the ingredients") do
+    visit("/ingredients")
+    fill_in("name", :with => "Sugar")
+    click_button("Submit")
+    expect(page).to have_content("Sugar")
+  end
 end
