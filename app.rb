@@ -52,3 +52,23 @@ post("/ingredients") do
   @ingredients = Ingredient.all()
   erb(:ingredients)
 end
+
+get('/ingredients/:id') do
+  @new_ingredient = Ingredient.find(params.fetch('id').to_i)
+  erb(:view_ingredient)
+end
+
+patch('/ingredients/:id') do
+  @new_ingredient = Ingredient.find(params.fetch('id').to_i)
+  name = params.fetch('name')
+  @new_ingredient.update({:name => name})
+  @new_ingredient = Ingredient.find(params.fetch('id').to_i)
+  erb(:view_ingredient)
+end
+
+delete('/ingredients/:id') do
+  @new_ingredient = Ingredient.find(params.fetch('id').to_i)
+  @new_ingredient.delete()
+  @ingredients = Ingredient.all()
+  redirect(:ingredients)
+end

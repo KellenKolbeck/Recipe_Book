@@ -10,7 +10,7 @@ describe("/categories", {:type => :feature}) do
 end
 
 describe("/categories/:id", {:type => :feature}) do
-  it("will allow a user to update a category name and display recipes") do
+  it("will allow a user to update a category name") do
     test_category = Category.new({:name => "Italian Food"})
     test_category.save()
     visit("/categories/#{test_category.id()}")
@@ -34,5 +34,24 @@ describe("/ingredients", {:type => :feature}) do
     fill_in("name", :with => "Sugar")
     click_button("Submit")
     expect(page).to have_content("Sugar")
+  end
+end
+
+describe("/ingredients/:id", {:type => :feature}) do
+  it("will allow a user to update a ingredient name") do
+    test_ingredient = Ingredient.new({:name => "Salt"})
+    test_ingredient.save()
+    visit("/ingredients/#{test_ingredient.id()}")
+    fill_in("name", :with => "Italian Food")
+    click_button("Edit")
+    expect(page).to have_content("Italian Food")
+  end
+
+  it("will allow a user to delete and ingredient name") do
+    test_ingredient = Ingredient.new({:name => "Salt"})
+    test_ingredient.save()
+    visit("/ingredients/#{test_ingredient.id()}")
+    click_button("Delete")
+    expect(page).to have_content("")
   end
 end
