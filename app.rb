@@ -89,3 +89,15 @@ post("/recipes") do
   @recipes = Recipe.all()
   erb(:recipes)
 end
+
+get("/recipes/:id") do
+  @new_recipe = Recipe.find(params.fetch("id").to_i)
+  erb(:view_recipe)
+end
+
+delete("/recipes/:id") do
+  @new_recipe = Recipe.find(params.fetch("id").to_i)
+  @new_recipe.delete()
+  @recipes = Recipe.all()
+  redirect(:recipes)
+end

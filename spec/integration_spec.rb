@@ -64,3 +64,13 @@ describe("/recipes", {:type => :feature}) do
     expect(page).to have_content("Justin's Surprise")
   end
 end
+
+describe("/recipes/:id", {:type => :feature}) do
+  it("will delete a recipe") do
+    test_recipe = Recipe.new({:name => "Justin's Surprise", :instructions => "", :ingredient_id => "nil", :category_id => "nil"})
+    test_recipe.save()
+    visit("/recipes/#{test_recipe.id()}")
+    click_button("Delete")
+    expect(page).to have_content("")
+  end
+end
