@@ -1,0 +1,28 @@
+<h1>Categories</h1>
+
+<% if @categories.any?() %>
+
+  <h3>Here are all the categories!</h3>
+
+  <ul>
+    <% @categories.each() do |category| %>
+      <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+  <h3>There are no categories!</h3>
+
+<% end %>
+
+<h3>Add a new Category</h3>
+
+<form action="/categories" method="post">
+  <div class="form-group">
+    <label for="name">Name of Category</label>
+    <input type="text" name="name" id="name" class="form-control">
+    <br>
+    <button type="submit" class="btn btn-danger">Submit</button>
+  </div>
+</form>
