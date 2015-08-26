@@ -23,3 +23,10 @@ get('/categories/:id') do
   @new_category = Category.find(params.fetch('id').to_i)
   erb(:view_category)
 end
+
+patch('/categories/:id') do
+  @new_category = Category.find(params.fetch('id').to_i)
+  name = params.fetch('name')
+  @new_category.update({:name => name})
+  erb(:view_category)
+end
