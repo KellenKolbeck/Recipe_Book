@@ -55,3 +55,12 @@ describe("/ingredients/:id", {:type => :feature}) do
     expect(page).to have_content("")
   end
 end
+
+describe("/recipes", {:type => :feature}) do
+  it("will save a new recipe and display all the recipes on the page") do
+    visit("/recipes")
+    fill_in("name", :with => "Justin's Surprise")
+    click_button("Submit")
+    expect(page).to have_content("Justin's Surprise")
+  end
+end

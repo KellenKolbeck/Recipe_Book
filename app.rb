@@ -2,6 +2,7 @@ require("bundler/setup")
 Bundler.require(:default)
 require("./lib/category")
 require("./lib/ingredient")
+require("./lib/recipe")
 
 get("/") do
   erb(:index)
@@ -71,4 +72,20 @@ delete('/ingredients/:id') do
   @new_ingredient.delete()
   @ingredients = Ingredient.all()
   redirect(:ingredients)
+end
+
+get("/recipes") do
+  @recipes = Recipe.all()
+  erb(:recipes)
+end
+
+post("/recipes") do
+  name = params.fetch("name")
+  instructions = params.fetch("instructions")
+  category_id = params.fetch("category_id")
+  ingredient_id = params.fetch("ingredient_id")
+  recipe = Recipe.new({:name => name, :instructions => instructions, :category_id => category_id, :ingredient_id => ingredient_id})
+  recipe.save()
+  @recipes = Recipe.all()
+  erb(:recipes)
 end
