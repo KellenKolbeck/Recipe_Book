@@ -1,0 +1,37 @@
+<h1><%= @new_recipe.name() %></h1>
+
+
+<form action="/recipes/<%= @new_recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-danger">Delete Recipe</button>
+</form>
+
+
+<form action="/recipes/<%= @new_recipe.id() %>/instructions" method="post">
+  <div class="form-group">
+    <label for="description">Add a step to the instructions:</label>
+    <input type="text" name="description" id="description" class="form-control">
+    <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
+    <br>
+    <button type="submit" class="btn btn-danger">Add Instruction</button>
+  </div>
+</form>
+
+
+<% @instructions.each() do |instruction| %>
+
+<li>
+  <%= instruction.description() %>
+    <form class="form-group" action="/recipes/<%= @new_recipe.id() %>/instructions" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="text" name="edit_description" id="edit_description">
+      <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
+      <input type="hidden" name="instruction_id" id="instruction_id" value="<%= @new_instruction.id() %>">
+      <button type="submit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></button>
+    </form>
+</li>
+
+<% end %>
+
+<h6><a href="/recipes">Back to Recipes</a></h6>
+<h6><a href="/">Back Home</a></h6>
