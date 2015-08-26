@@ -3,6 +3,7 @@ Bundler.require(:default)
 require("./lib/category")
 require("./lib/ingredient")
 require("./lib/recipe")
+require("./lib/instruction")
 
 get("/") do
   erb(:index)
@@ -92,6 +93,7 @@ end
 
 get("/recipes/:id") do
   @new_recipe = Recipe.find(params.fetch("id").to_i)
+  @instructions = Instruction.all()
   erb(:view_recipe)
 end
 
@@ -100,4 +102,25 @@ delete("/recipes/:id") do
   @new_recipe.delete()
   @recipes = Recipe.all()
   redirect(:recipes)
+end
+
+post("/recipes/:id/instructions") do
+  description = params.fetch("description")
+  recipe_id = params.fetch("recipe_id")
+  @new_recipe = Recipe.find(params.fetch("id").to_i)
+  @new_instruction = Instruction.new(:description => description, :recipe_id => recipe_id)
+  @new_instruction.save()
+  @instructions = Instruction.all()
+  erb(:view_recipe)
+end
+
+patch("/recipes/:id/instructions") do
+  @new_instruction = Instruction.find(params.fetch("id"))
+  edit_description = params.fetch("edit_description")
+  recipe_id = params.fetch("recipe_id")
+  instruction_id = params.fetch("instruction_id")
+  @new_recipe = Recipe.find(params.fetch("id").to_i)
+  @new_instruction.update({:description => edit_description, :recipe_id => recipe_id})
+  @instructions = Instruction.all()
+  erb(:view_recipe)
 end
