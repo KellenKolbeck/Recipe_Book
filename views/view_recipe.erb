@@ -53,3 +53,39 @@
 
   </div>
 </div>
+
+
+<div class="col-md-6">
+  <div class="jumbotron">
+    <form action="/recipes/<%= @new_recipe.id() %>/ingredients" method="post">
+      <div class="form-group">
+        <label for="ingredient">Add an ingredient:</label>
+        <input type="text" name="ingredient" id="ingredient" class="text-center">
+        <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
+        <br></br>
+        <button type="submit" class="btn btn-danger">Add Ingredient</button>
+      </div>
+    </form>
+
+    <% if @ingredients.any?() %>
+
+      <h4>Here are the ingredients:</h4>
+
+      <div class="list">
+        <ul>
+          <% @ingredients.each() do |ingredient| %>
+            <li>
+              <%= ingredient.name() %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+    <% else %>
+
+      <h4>There aren't any ingredients yet.</h4>
+
+    <% end %>
+
+  </div>
+</div>

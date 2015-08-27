@@ -18,7 +18,8 @@
 
 .jumbotron {
   text-align:center;
-  background-color:#64E6ED;
+  background-color:#23203E;
+  width:100% !important;
 }
 
 .list ul {
@@ -32,7 +33,7 @@
 }
 
 .navbar a {
-  color: #64E6ED !important;
+  color: #23203E !important;
 }
 
 .container {
@@ -40,15 +41,34 @@
 }
 
 button {
-  background-color:rgb(217, 83, 79);
-  border:none;
+  background-color:#F2E0D0 !important;
+  border:none !important;
   border-radius:4px;
+  color:#23203E !important;
 }
 
+
 span {
-  color:white;
+  color:#23203E !important;;
 }
 
 body {
-  background-color:rgb(217, 83, 79);
+  background-color:#FFFFFF;
+  color:rgb(255, 255, 255);
+}
+
+a {
+  color:#F2E0D0;
+}
+
+a:hover {
+  color:#F2E0D0;
+}
+
+input {
+  color:black;
+}
+
+select {
+  color:black !important;
 }

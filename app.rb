@@ -45,13 +45,17 @@ end
 
 get("/ingredients") do
   @ingredients = Ingredient.all()
+  @recipes = Recipe.all()
   erb(:ingredients)
 end
 
 post("/ingredients") do
   name = params.fetch("name")
-  ingredient = Ingredient.new({:name => name})
-  ingredient.save()
+  recipe_id = params.fetch("recipe_id")
+  recipe = Recipe.find(recipe_id)
+  ingredient = Ingredient.create({:name => name})
+  recipe.ingredients.push(ingredient)
+  @recipes = Recipe.all()
   @ingredients = Ingredient.all()
   redirect("/ingredients")
 end
@@ -72,6 +76,7 @@ end
 delete('/ingredients/:id') do
   @new_ingredient = Ingredient.find(params.fetch('id').to_i)
   @new_ingredient.delete()
+  @recipes = Recipe.all()
   @ingredients = Ingredient.all()
   redirect("/ingredients")
 end
@@ -95,6 +100,7 @@ end
 get("/recipes/:id") do
   @new_recipe = Recipe.find(params.fetch("id").to_i)
   @instructions = @new_recipe.instructions()
+  @ingredients = @new_recipe.ingredients()
   erb(:view_recipe)
 end
 
@@ -112,6 +118,7 @@ post("/recipes/:id/instructions") do
   @new_instruction = Instruction.new(:description => description, :recipe_id => recipe_id)
   @new_instruction.save()
   @instructions = @new_recipe.instructions()
+  @ingredients = @new_recipe.ingredients()
   redirect("/recipes/#{@new_recipe.id()}")
 end
 
@@ -122,6 +129,7 @@ patch("/recipes/:id/instructions/:instruction_id") do
   @new_recipe = Recipe.find(params.fetch("id").to_i)
   @new_instruction.update({:description => edit_description, :recipe_id => recipe_id})
   @instructions = @new_recipe.instructions().order("id ASC")
+  @ingredients = @new_recipe.ingredients()
   redirect("/recipes/#{@new_recipe.id()}")
 end
 
@@ -130,5 +138,15 @@ delete("/recipes/:id/instructions/:instruction_id") do
   @new_instruction = Instruction.find(params.fetch("instruction_id"))
   @new_instruction.delete()
   @instructions = @new_recipe.instructions().order("id ASC")
+  @ingredients = @new_recipe.ingredients()
   redirect("/recipes/#{@new_recipe.id}")
+end
+
+post("/recipes/:id/ingredients") do
+  ingredient = params.fetch('ingredient')
+  recipe_id = params.fetch('recipe_id')
+  @new_recipe = Recipe.find(params.fetch('id').to_i)
+  @new_ingredient = Ingredient.create({:name => ingredient})
+  @new_recipe.ingredients.push(@new_ingredient)
+  redirect("/recipes/#{@new_recipe.id()}")
 end

@@ -27,6 +27,11 @@
     <div class="form-group">
       <label for="name">Name of Ingredient</label>
       <input type="text" name="name" id="name" class="text-center">
+      <select class="" name="recipe_id">
+        <% @recipes.each() do |recipe| %>
+            <option value="<%= recipe.id %>"><%= recipe.name %></option>
+        <% end %>
+      </select>
       <br></br>
       <button type="submit" class="btn btn-danger">Submit</button>
     </div>
