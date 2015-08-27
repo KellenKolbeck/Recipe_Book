@@ -1,30 +1,35 @@
-<h1>Ingredients</h1>
+<div class="jumbotron">
+  <h1>Ingredients</h1>
+</div>
 
-<% if @ingredients.any?() %>
+<div class="jumbotron">
+  <% if @ingredients.any?() %>
 
-<h3>Here are all the ingredients!</h3>
+  <h3>Here are all the ingredients!</h3>
 
-<ul>
-  <% @ingredients.each() do |ingredient| %>
-  <li><a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a></li>
-  <% end %>
-</ul>
-
-<% else %>
-
-<h3>There are no ingredients!</h3>
-
-<% end %>
-
-<h3>Add a new Ingredient</h3>
-
-<form action="/ingredients" method="post">
-  <div class="form-group">
-    <label for="name">Name of Ingredient</label>
-    <input type="text" name="name" id="name" class="form-control">
-    <br>
-    <button type="submit" class="btn btn-danger">Submit</button>
+  <div class="list">
+    <ul>
+      <% @ingredients.each() do |ingredient| %>
+      <li><a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a></li>
+      <% end %>
+    </ul>
   </div>
-</form>
 
-<h6><a href="/">Back Home</a></h6>
+  <% else %>
+
+  <h3>There are no ingredients!</h3>
+
+  <% end %>
+
+  <h3>Add a new Ingredient</h3>
+
+  <form action="/ingredients" method="post">
+    <div class="form-group">
+      <label for="name">Name of Ingredient</label>
+      <input type="text" name="name" id="name" class="text-center">
+      <br></br>
+      <button type="submit" class="btn btn-danger">Submit</button>
+    </div>
+  </form>
+
+</div>

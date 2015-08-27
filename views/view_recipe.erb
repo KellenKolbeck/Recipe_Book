@@ -1,37 +1,55 @@
-<h1><%= @new_recipe.name() %></h1>
+<div class="jumbotron">
+  <h1><%= @new_recipe.name() %></h1>
 
 
-<form action="/recipes/<%= @new_recipe.id() %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-danger">Delete Recipe</button>
-</form>
+  <form action="/recipes/<%= @new_recipe.id() %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger">Delete <%= @new_recipe.name() %></button>
+  </form>
+</div>
 
-
-<form action="/recipes/<%= @new_recipe.id() %>/instructions" method="post">
-  <div class="form-group">
-    <label for="description">Add a step to the instructions:</label>
-    <input type="text" name="description" id="description" class="form-control">
-    <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
-    <br>
-    <button type="submit" class="btn btn-danger">Add Instruction</button>
-  </div>
-</form>
-
-
-<% @instructions.each() do |instruction| %>
-
-<li>
-  <%= instruction.description() %>
-    <form class="form-group" action="/recipes/<%= @new_recipe.id() %>/instructions" method="post">
-      <input type="hidden" name="_method" value="patch">
-      <input type="text" name="edit_description" id="edit_description">
-      <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
-      <input type="hidden" name="instruction_id" id="instruction_id" value="<%= @new_instruction.id() %>">
-      <button type="submit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></button>
+<div class="col-md-6">
+  <div class="jumbotron">
+    <form action="/recipes/<%= @new_recipe.id() %>/instructions" method="post">
+      <div class="form-group">
+        <label for="description">Add a step to the instructions:</label>
+        <input type="text" name="description" id="description" class="text-center">
+        <input type="hidden" name="recipe_id" id="recipe_id" value="<%= @new_recipe.id() %>">
+        <br></br>
+        <button type="submit" class="btn btn-danger">Add Instruction</button>
+      </div>
     </form>
-</li>
 
-<% end %>
+    <% if @instructions.any?() %>
 
-<h6><a href="/recipes">Back to Recipes</a></h6>
-<h6><a href="/">Back Home</a></h6>
+      <h4>Here are the recipe directions:</h4>
+
+      <ol>
+      <% @instructions.each() do |instruction| %>
+
+          <li>
+            <div class="form-inline">
+              <%= instruction.description() %> -
+              <form class="edit-form" action="/recipes/<%= @new_recipe.id() %>/instructions/<%= instruction.id %>" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input class="text-center" type="text" name="edit_description" id="edit_description">
+                <button type="submit"><span class="glyphicon glyphicon-edit" aria-hidden="true"></button>
+              </form>
+              <form class="delete-button" action="/recipes/<%= @new_recipe.id() %>/instructions/<%= instruction.id() %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </form>
+            </div>
+          </li>
+
+      <% end %>
+    </ol>
+
+    <% else %>
+
+      <h4>There aren't any instructions yet.</h4>
+
+    <% end %>
+
+  </div>
+</div>

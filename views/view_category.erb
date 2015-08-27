@@ -1,24 +1,23 @@
-<h1><%= @new_category.name %></h1>
+<div class="jumbotron">
+  <h1><%= @new_category.name %></h1>
 
+  <form action="/categories/<%= @new_category.id() %>" method="post">
+    <div class="form-group">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger">Delete <%= @new_category.name() %></button>
+    </div>
+  </form>
+</div>
 
-<form action="/categories/<%= @new_category.id() %>" method="post">
-  <div class="form-group">
-    <input type="hidden" name="_method" value="patch">
-    <label for="name">Edit category name</label>
-    <input type="text" name="name" id="name" class="form-control">
-    <br>
-    <button type="submit" class="btn btn-danger">Edit</button>
-  </div>
-</form>
+<div class="jumbotron">
+  <form action="/categories/<%= @new_category.id() %>" method="post">
+    <div class="form-group">
+      <input type="hidden" name="_method" value="patch">
+      <label for="name">Edit Category Name:</label>
+      <input type="text" name="name" id="name" class="text-center">
+      <br></br>
+      <button type="submit" class="btn btn-danger">Edit</button>
+    </div>
+  </form>
 
-
-<form action="/categories/<%= @new_category.id() %>" method="post">
-  <div class="form-group">
-    <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-danger">Delete</button>
-  </div>
-</form>
-
-
-<h6><a href="/categories">Back to Categories</a></h6>
-<h6><a href="/">Back Home</a></h6>
+</div>

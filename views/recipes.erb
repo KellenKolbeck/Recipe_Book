@@ -1,32 +1,36 @@
-<h1>Recipes</h1>
+<div class="jumbotron">
+  <h1>Recipes</h1>
+</div>
 
-<% if @recipes.any?() %>
+<div class="jumbotron">
+  <% if @recipes.any?() %>
 
-  <h3>Here are all your recipes!</h3>
+    <h3>Here are all your recipes!</h3>
 
-  <ul>
-    <% @recipes.each() do |recipe| %>
-      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
-    <% end %>
-  </ul>
+    <div class="list">
+      <ul>
+        <% @recipes.each() do |recipe| %>
+          <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
+        <% end %>
+      </ul>
+    </div>
 
-<% else %>
+  <% else %>
 
-  <h3>There aren't any recipes yet!</h3>
+    <h3>There aren't any recipes yet!</h3>
 
-<% end %>
+  <% end %>
 
-<form action="/recipes" method="post">
-  <div class="form-group">
-    <label for="name">Recipe Name</label>
-    <input type="text" name="name" id="name" class="form-control">
-    <input type="hidden" name="instructions" id="instructions" value="">
-    <input type="hidden" name="category_id" id="category_id" value="nil">
-    <input type="hidden" name="ingredient_id" id="ingredient_id" value="nil">
-    <br>
-    <button type="submit" class="btn btn-danger">Submit</button>
-  </div>
-</form>
+  <form action="/recipes" method="post">
+    <div class="form-group">
+      <label for="name">Recipe Name</label>
+      <input type="text" name="name" id="name" class="text-center">
+      <input type="hidden" name="instruction_id" id="instruction_id" value="nil">
+      <input type="hidden" name="category_id" id="category_id" value="nil">
+      <input type="hidden" name="ingredient_id" id="ingredient_id" value="nil">
+      <br></br>
+      <button type="submit" class="btn btn-danger">Submit</button>
+    </div>
+  </form>
 
-
-<h6><a href="/">Back Home</a></h6>
+</div

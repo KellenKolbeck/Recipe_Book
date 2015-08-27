@@ -1,30 +1,35 @@
-<h1>Categories</h1>
+<div class="jumbotron">
+  <h1>Categories</h1>
+</div>
 
-<% if @categories.any?() %>
+<div class="jumbotron">
+  <% if @categories.any?() %>
 
-  <h3>Here are all the categories!</h3>
+    <h3>Here are all the categories!</h3>
 
-  <ul>
-    <% @categories.each() do |category| %>
-      <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a></li>
-    <% end %>
-  </ul>
+    <div class="list">
+        <ul>
+          <% @categories.each() do |category| %>
+            <li><a href="/categories/<%= category.id() %>"><%= category.name() %></a></li>
+          <% end %>
+        </ul>
+    </div>
 
-<% else %>
+  <% else %>
 
-  <h3>There are no categories!</h3>
+    <h3>There are no categories!</h3>
 
-<% end %>
+  <% end %>
 
-<h3>Add a new Category</h3>
+  <h3>Add a new Category</h3>
 
-<form action="/categories" method="post">
-  <div class="form-group">
-    <label for="name">Name of Category</label>
-    <input type="text" name="name" id="name" class="form-control">
-    <br>
-    <button type="submit" class="btn btn-danger">Submit</button>
-  </div>
-</form>
+  <form action="/categories" method="post">
+    <div class="form-group">
+      <label for="name">Name of Category:</label>
+      <input type="text" name="name" id="name" class="text-center">
+      <br></br>
+      <button type="submit" class="btn btn-danger">Submit</button>
+    </div>
+  </form>
 
-<h6><a href="/">Back Home</a></h6>
+</div>

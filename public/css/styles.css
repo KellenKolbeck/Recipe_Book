@@ -1,0 +1,54 @@
+.delete-button {
+  width:30px;
+  display:inline;
+}
+
+.edit-form {
+  width: 300px;
+  display:inline;
+}
+
+.form-inline {
+  padding: 10px;
+}
+
+.form-control {
+  width:200px;
+}
+
+.jumbotron {
+  text-align:center;
+  background-color:#64E6ED;
+}
+
+.list ul {
+  list-style:none;
+  padding-left:0;
+}
+
+.navbar {
+  background-color:rgb(255, 255, 255);
+  border:none;
+}
+
+.navbar a {
+  color: #64E6ED !important;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+button {
+  background-color:rgb(217, 83, 79);
+  border:none;
+  border-radius:4px;
+}
+
+span {
+  color:white;
+}
+
+body {
+  background-color:rgb(217, 83, 79);
+}
